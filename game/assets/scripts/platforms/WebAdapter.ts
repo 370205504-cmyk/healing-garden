@@ -231,4 +231,24 @@ export class WebAdapter implements IPlatformAdapter {
             networkType: 'unknown',
         };
     }
+    
+    async setStorage(key: string, data: any): Promise<void> {
+        try {
+            const json = JSON.stringify(data);
+            localStorage.setItem(key, json);
+        } catch (error) {
+            console.error(`WebAdapter: 存储失败 (key=${key}):`, error);
+        }
+    }
+
+    async getStorage<T>(key: string): Promise<T | null> {
+        try {
+            const raw = localStorage.getItem(key);
+            if (raw === null) return null;
+            return JSON.parse(raw) as T;
+        } catch (error) {
+            console.error(`WebAdapter: 读取失败 (key=${key}):`, error);
+            return null;
+        }
+    }
 }

@@ -3,6 +3,7 @@ import { PlantingSystem } from './PlantingSystem';
 import { GardenSystem } from './GardenSystem';
 import { EconomySystem } from './EconomySystem';
 import { UIManager } from './UIManager';
+import { StorageUtil } from './utils/StorageUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameManager')
@@ -96,26 +97,24 @@ export class GameManager extends Component {
     
     // 保存游戏数据
     saveGameData() {
-        const data = {
+        StorageUtil.set('auto_healing_garden', {
             coins: this._coins,
             level: this._level,
             experience: this._experience
-        };
-        localStorage.setItem('auto_healing_garden', JSON.stringify(data));
+        });
     }
     
     // 加载游戏数据
     loadGameData() {
-        const saved = localStorage.getItem('auto_healing_garden');
-        if (saved) {
-            try {
-                const data = JSON.parse(saved);
-                this._coins = data.coins || 100;
-                this._level = data.level || 1;
-                this._experience = data.experience || 0;
-            } catch (e) {
-                console.error('加载游戏数据失败:', e);
-            }
+        const data = StorageUtil.get<{
+            coins?: number;
+            level?: number;
+            experience?: number;
+        }>('auto_healing_garden');
+        if (data) {
+            this._coins = data.coins ?? 100;
+            this._level = data.level ?? 1;
+            this._experience = data.experience ?? 0;
         }
     }
     

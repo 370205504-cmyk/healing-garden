@@ -179,6 +179,20 @@ export class PlatformManager extends Component {
     }
     
     /**
+     * 保存数据到平台存储（快捷方法）
+     */
+    public async setStorage(key: string, data: any): Promise<void> {
+        return this.adapter.setStorage(key, data);
+    }
+    
+    /**
+     * 从平台存储读取数据（快捷方法）
+     */
+    public async getStorage<T>(key: string): Promise<T | null> {
+        return this.adapter.getStorage<T>(key);
+    }
+    
+    /**
      * 震动反馈（快捷方法）
      */
     public async vibrate(style: 'short' | 'long' = 'short'): Promise<void> {

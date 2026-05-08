@@ -499,4 +499,24 @@ export class WeChatAdapter implements IPlatformAdapter {
             });
         });
     }
+    
+    async setStorage(key: string, data: any): Promise<void> {
+        if (!this.isWeChatAvailable()) return;
+        try {
+            wx.setStorageSync(key, data);
+        } catch (error) {
+            console.error(`WeChatAdapter: 存储失败 (key=${key}):`, error);
+        }
+    }
+
+    async getStorage<T>(key: string): Promise<T | null> {
+        if (!this.isWeChatAvailable()) return null;
+        try {
+            const result = wx.getStorageSync(key);
+            return result !== '' && result !== undefined ? result as T : null;
+        } catch (error) {
+            console.error(`WeChatAdapter: 读取失败 (key=${key}):`, error);
+            return null;
+        }
+    }
 }

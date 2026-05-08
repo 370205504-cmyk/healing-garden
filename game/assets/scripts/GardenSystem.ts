@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Vec3 } from 'cc';
+import { StorageUtil } from './utils/StorageUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('GardenSystem')
@@ -130,28 +131,27 @@ export class GardenSystem extends Component {
     
     // 保存花园数据
     saveGardenData() {
-        const data = {
+        StorageUtil.set('garden_data', {
             unlockedAreas: this.gardenAreas.filter(a => a.unlocked).map(a => a.id),
             decorations: this.decorations
-        };
-        localStorage.setItem('garden_data', JSON.stringify(data));
+        });
     }
     
     // 加载花园数据
     loadGardenData() {
-        const saved = localStorage.getItem('garden_data');
-        if (saved) {
-            try {
-                const data = JSON.parse(saved);
-                
-                // 解锁区域
-                data.unlockedAreas?.forEach((areaId: number) => {
-                    const area = this.gardenAreas.find(a => a.id === areaId);
-                    if (area) area.unlocked = true;
-                });
-                
-                // 加载装饰品
-                this.decorations = data.decorations || [];
+        const data = StorageUtil.get<{
+            unlockedAreas?: number[];
+            decorations?: any[];
+        }>('garden_data');
+        if (data) {
+            // 解锁区域
+            data.unlockedAreas?.forEach((areaId: number) => {
+                const area = this.gardenAreas.find(a => a.id === areaId);
+                if (area) area.unlocked = true;
+            });
+            
+            // 加载装饰品
+            this.decorations = data.decorations || [];
                 
             } catch (e) {
                 console.error('加载花园数据失败:', e);

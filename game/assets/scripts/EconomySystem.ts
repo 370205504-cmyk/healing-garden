@@ -1,4 +1,5 @@
 import { _decorator, Component, Node } from 'cc';
+import { StorageUtil } from './utils/StorageUtil';
 const { ccclass, property } = _decorator;
 
 @ccclass('EconomySystem')
@@ -136,16 +137,15 @@ export class EconomySystem extends Component {
     // 保存背包数据
     saveInventory() {
         const inventoryObj = Object.fromEntries(this.inventory);
-        localStorage.setItem('inventory', JSON.stringify(inventoryObj));
+        StorageUtil.set('inventory', inventoryObj);
     }
     
     // 加载背包数据
     loadInventory() {
-        const saved = localStorage.getItem('inventory');
-        if (saved) {
+        const inventoryObj = StorageUtil.get<Record<string, number>>('inventory');
+        if (inventoryObj) {
             try {
-                const inventoryObj = JSON.parse(saved);
-                this.inventory = new Map(Object.entries(inventoryObj).map(([k, v]) => [parseInt(k), v as number]));
+                this.inventory = new Map(Object.entries(inventoryObj));
             } catch (e) {
                 console.error('加载背包数据失败:', e);
             }

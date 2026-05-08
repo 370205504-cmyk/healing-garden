@@ -493,4 +493,24 @@ export class DouyinAdapter implements IPlatformAdapter {
             });
         });
     }
+    
+    async setStorage(key: string, data: any): Promise<void> {
+        if (!this.isDouyinAvailable()) return;
+        try {
+            tt.setStorageSync(key, data);
+        } catch (error) {
+            console.error(`DouyinAdapter: 存储失败 (key=${key}):`, error);
+        }
+    }
+
+    async getStorage<T>(key: string): Promise<T | null> {
+        if (!this.isDouyinAvailable()) return null;
+        try {
+            const result = tt.getStorageSync(key);
+            return result !== '' && result !== undefined ? result as T : null;
+        } catch (error) {
+            console.error(`DouyinAdapter: 读取失败 (key=${key}):`, error);
+            return null;
+        }
+    }
 }
