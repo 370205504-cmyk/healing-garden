@@ -533,7 +533,10 @@ function validateLayout() {
     ];
     
     for (const config of requiredConfigs) {
-      if (!content.includes(`"${config}"`) && !content.includes(`'${config}'`)) {
+      // JS 对象字面量中属性名可以无引号，兼容三种写法
+      const hasQuoted = content.includes(`"${config}"`) || content.includes(`'${config}'`);
+      const hasUnquoted = content.includes(`${config}:`) || content.includes(`${config} `);
+      if (!hasQuoted && !hasUnquoted) {
         warnings.push(`游戏配置缺少必要部分: "${config}"`);
       }
     }
@@ -551,9 +554,9 @@ function validateLayout() {
       'initPlots',
       'render',
       'update',
-      'handleTouch',
+      'handleTouchStart',
       'plantFlower',
-      'harvestPlot'
+      'harvestFlower'
     ];
     
     for (const func of requiredFunctions) {
