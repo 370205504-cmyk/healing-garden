@@ -28,13 +28,18 @@ export class EconomySystem extends Component {
         this.loadInventory();
     }
     
+    // 获取 GameManager（优先使用注入的引用，其次尝试全局单例）
+    private getGameManager(): any {
+        return this._gameManager || (window as any).GameManager?.instance;
+    }
+
     // 购买物品
     buyItem(itemId: number, quantity: number = 1): boolean {
         const item = this.shopItems.find(i => i.id === itemId);
         if (!item) return false;
         
         // 检查是否已解锁
-        const gameManager = (window as any).GameManager?.instance;
+        const gameManager = this.getGameManager();
         if (gameManager && gameManager.level < item.unlockLevel) {
             console.log(`需要等级 ${item.unlockLevel} 才能购买 ${item.name}`);
             return false;
@@ -81,7 +86,7 @@ export class EconomySystem extends Component {
         this.saveInventory();
         
         // 增加金币
-        const gameManager = (window as any).GameManager?.instance;
+        const gameManager = this.getGameManager();
         if (gameManager) {
             gameManager.addCoins(totalValue);
         }
@@ -117,7 +122,7 @@ export class EconomySystem extends Component {
     
     // 获取商店物品
     getShopItems(): any[] {
-        const gameManager = (window as any).GameManager?.instance;
+        const gameManager = this.getGameManager();
         const playerLevel = gameManager?.level || 1;
         
         // 只返回已解锁的物品
@@ -154,7 +159,7 @@ export class EconomySystem extends Component {
     
     // 获取玩家资产统计
     getPlayerAssets(): any {
-        const gameManager = (window as any).GameManager?.instance;
+        const gameManager = this.getGameManager();
         
         return {
             coins: gameManager?.coins || 0,
