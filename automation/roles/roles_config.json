@@ -1,0 +1,98 @@
+{
+  "cost-controller": {
+    "name": "预算与成本控制师",
+    "description": "负责成本核算、预算控制、ROI分析",
+    "dependencies": [],
+    "outputs": ["management/cost-control/budget.json", "management/cost-control/cost_report.md"],
+    "time_estimate": 0.5,
+    "cost_estimate": 0.1
+  },
+  "product-manager": {
+    "name": "产品经理",
+    "description": "负责需求分析、产品设计、PRD生成",
+    "dependencies": ["cost-controller"],
+    "outputs": ["docs/product/prd.md", "docs/product/gameplay_design.md"],
+    "time_estimate": 1.0,
+    "cost_estimate": 0.2
+  },
+  "ui-designer": {
+    "name": "UI/UX设计师",
+    "description": "负责UI设计、美术资源生成",
+    "dependencies": ["product-manager"],
+    "outputs": ["docs/design/ui_design.json", "assets/resources/textures/"],
+    "time_estimate": 1.5,
+    "cost_estimate": 0.3
+  },
+  "tech-director": {
+    "name": "技术总监",
+    "description": "负责技术架构、技术选型、规范制定",
+    "dependencies": ["product-manager"],
+    "outputs": ["docs/technical/architecture.md", "docs/technical/tech_stack.json"],
+    "time_estimate": 1.0,
+    "cost_estimate": 0.2
+  },
+  "project-manager": {
+    "name": "项目经理",
+    "description": "负责项目计划、进度跟踪、资源协调",
+    "dependencies": ["tech-director", "product-manager"],
+    "outputs": ["management/schedule/project_plan.md", "management/schedule/timeline.json"],
+    "time_estimate": 0.8,
+    "cost_estimate": 0.15
+  },
+  "cocos-dev": {
+    "name": "Cocos开发工程师",
+    "description": "负责前端功能开发、性能优化",
+    "dependencies": ["tech-director", "ui-designer"],
+    "outputs": ["assets/scripts/", "docs/technical/code_documentation.md"],
+    "time_estimate": 3.0,
+    "cost_estimate": 0.6
+  },
+  "server-dev": {
+    "name": "服务端开发工程师",
+    "description": "负责后端API开发、数据安全",
+    "dependencies": ["tech-director"],
+    "outputs": ["docs/technical/api_docs.md", "management/deployment/server_config.json"],
+    "time_estimate": 2.0,
+    "cost_estimate": 0.4
+  },
+  "tester": {
+    "name": "测试工程师",
+    "description": "负责自动化测试、性能测试",
+    "dependencies": ["cocos-dev", "server-dev"],
+    "outputs": ["docs/testing/test_report.md", "docs/testing/performance.json"],
+    "time_estimate": 1.5,
+    "cost_estimate": 0.3
+  },
+  "auditor": {
+    "name": "审核专员",
+    "description": "负责合规审核、版权排查",
+    "dependencies": ["tester"],
+    "outputs": ["docs/compliance/compliance_report.md", "docs/compliance/audit_result.json"],
+    "time_estimate": 1.0,
+    "cost_estimate": 0.2
+  },
+  "ops-engineer": {
+    "name": "运维工程师",
+    "description": "负责环境部署、监控配置",
+    "dependencies": ["auditor"],
+    "outputs": ["management/deployment/deployment_scripts/", "management/deployment/monitoring_config/"],
+    "time_estimate": 1.0,
+    "cost_estimate": 0.2
+  },
+  "build-delivery": {
+    "name": "构建打包与上线交付工程师",
+    "description": "负责构建打包、上架提报",
+    "dependencies": ["ops-engineer", "auditor"],
+    "outputs": ["outputs/builds/", "outputs/releases/"],
+    "time_estimate": 1.5,
+    "cost_estimate": 0.3
+  },
+  "master-control": {
+    "name": "团队总控",
+    "description": "负责全流程调度、质量把控、终审决策",
+    "dependencies": ["build-delivery"],
+    "outputs": ["outputs/reports/final_report.md", "knowledge-base/project_summary/"],
+    "time_estimate": 2.0,
+    "cost_estimate": 0.4
+  }
+}

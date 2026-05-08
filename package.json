@@ -1,0 +1,61 @@
+{
+  "name": "auto-healing-garden",
+  "version": "1.0.0",
+  "description": "自动治愈花园 - 国内首款「零压力情绪疗愈向」自动养成休闲小游戏",
+  "main": "src/game.js",
+  "scripts": {
+    "validate": "node scripts/validate.js",
+    "validate:path": "node scripts/validate.js --path",
+    "validate:theme": "node scripts/validate.js --theme",
+    "validate:syntax": "node scripts/validate.js --syntax",
+    "validate:compatibility": "node scripts/validate.js --compatibility",
+    "validate:runtime": "node scripts/validate.js --runtime",
+    "validate:layout": "node scripts/validate.js --layout",
+    "validate:compliance": "node scripts/validate.js --compliance",
+    "test": "npm run validate",
+    "test:synthesis": "node scripts/test-synthesis.js",
+    "test:unit": "node src/synthesis/test.js",
+    "build": "node scripts/build.js",
+    "dev": "echo '开发服务器待实现'",
+    "lint": "echo '代码检查待实现'",
+    "ci": "npm run validate && npm run test:synthesis"
+  },
+  "keywords": [
+    "治愈",
+    "花园",
+    "小游戏",
+    "微信小游戏",
+    "抖音小游戏",
+    "休闲游戏",
+    "情绪疗愈"
+  ],
+  "author": "自动治愈花园开发团队",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/auto-healing-garden/auto-healing-garden.git"
+  },
+  "bugs": {
+    "url": "https://github.com/auto-healing-garden/auto-healing-garden/issues"
+  },
+  "homepage": "https://github.com/auto-healing-garden/auto-healing-garden#readme",
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "fs-extra": "^11.0.0"
+  },
+  "files": [
+    "src/",
+    "platform/",
+    "config/",
+    "assets/",
+    "dist/",
+    "scripts/",
+    "docs/",
+    "README.md",
+    "DEVELOPMENT_GUIDE.md"
+  ]
+}

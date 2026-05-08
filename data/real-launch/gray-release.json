@@ -1,0 +1,14 @@
+{
+  "stages": [
+    {
+      "name": "内部测试",
+      "percentage": 5,
+      "startedAt": "2026-04-07T13:09:33.606Z",
+      "status": "in_progress",
+      "description": "团队内部和核心用户测试"
+    }
+  ],
+  "currentStage": 1,
+  "startedAt": "2026-04-07T13:09:33.606Z",
+  "completedAt": null
+}

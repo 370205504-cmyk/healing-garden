@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>治愈花园 - 手绘治愈风种植游戏</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=ZCOOL+QingKe+HuangYou&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 顶部信息栏 -->
+        <header class="game-header">
+            <div class="player-info">
+                <div class="level-info">
+                    <span class="label">等级</span>
+                    <div class="level-badge">Lv.7</div>
+                    <div class="exp-bar">
+                        <div class="exp-fill" style="width: 65%;"></div>
+                        <span class="exp-text">65/100</span>
+                    </div>
+                </div>
+                <div class="resources">
+                    <div class="coin-display">
+                        <i class="fas fa-coins coin-icon"></i>
+                        <span class="coin-amount">1,245</span>
+                    </div>
+                    <div class="gem-display">
+                        <i class="fas fa-gem gem-icon"></i>
+                        <span class="gem-amount">42</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="time-weather">
+                <div class="time-display">
+                    <i class="fas fa-sun weather-icon"></i>
+                    <span class="time-text">午后 2:30</span>
+                </div>
+                <div class="season-display">
+                    <i class="fas fa-leaf season-icon"></i>
+                    <span class="season-text">春</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 游戏主场景 -->
+        <main class="game-scene">
+            <!-- 天空背景 -->
+            <div class="sky-background">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="cloud cloud-3"></div>
+                <div class="sun"></div>
+            </div>
+            
+            <!-- 花园标题 -->
+            <div class="garden-title">
+                <h1 class="title-text">治愈花园</h1>
+                <div class="title-decoration">
+                    <span class="leaf">🍃</span>
+                    <span class="flower">🌸</span>
+                    <span class="leaf">🍃</span>
+                </div>
+            </div>
+            
+            <!-- 花园网格区域 -->
+            <div class="garden-grid-container">
+                <div class="grid-header">
+                    <div class="grid-stats">
+                        <span class="plot-count">已解锁: 12/24 地块</span>
+                        <span class="plant-count">正在生长: 8 株</span>
+                    </div>
+                    <button class="grid-action-btn">
+                        <i class="fas fa-expand-alt"></i> 展开
+                    </button>
+                </div>
+                
+                <div class="garden-grid">
+                    <!-- 4行 x 6列网格，动态生成 -->
+                </div>
+                
+                <div class="grid-actions">
+                    <button class="action-btn harvest-all">
+                        <i class="fas fa-hands"></i> 一键收获
+                    </button>
+                    <button class="action-btn water-all">
+                        <i class="fas fa-tint"></i> 一键浇水
+                    </button>
+                    <button class="action-btn clean-all">
+                        <i class="fas fa-broom"></i> 一键清理
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 浮动装饰元素 -->
+            <div class="floating-decorations">
+                <div class="butterfly butterfly-1">🦋</div>
+                <div class="butterfly butterfly-2">🦋</div>
+                <div class="firefly firefly-1">✨</div>
+                <div class="firefly firefly-2">✨</div>
+                <div class="firefly firefly-3">✨</div>
+            </div>
+        </main>
+
+        <!-- 底部功能栏 -->
+        <footer class="game-footer">
+            <div class="function-buttons">
+                <button class="func-btn seed-shop" data-tooltip="种子商店">
+                    <i class="fas fa-seedling btn-icon"></i>
+                    <span class="btn-text">种子</span>
+                </button>
+                
+                <button class="func-btn album" data-tooltip="植物图鉴">
+                    <i class="fas fa-book btn-icon"></i>
+                    <span class="btn-text">图鉴</span>
+                </button>
+                
+                <button class="func-btn decorate" data-tooltip="花园装饰">
+                    <i class="fas fa-paint-brush btn-icon"></i>
+                    <span class="btn-text">装饰</span>
+                </button>
+                
+                <button class="func-btn backpack" data-tooltip="背包物品">
+                    <i class="fas fa-backpack btn-icon"></i>
+                    <span class="btn-text">背包</span>
+                </button>
+                
+                <button class="func-btn friends" data-tooltip="好友花园">
+                    <i class="fas fa-users btn-icon"></i>
+                    <span class="btn-text">好友</span>
+                </button>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="quick-btn daily-checkin" data-tooltip="每日签到">
+                    <i class="fas fa-calendar-day"></i>
+                </button>
+                <button class="quick-btn settings" data-tooltip="游戏设置">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="quick-btn share" data-tooltip="分享花园">
+                    <i class="fas fa-share-alt"></i>
+                </button>
+            </div>
+        </footer>
+        
+        <!-- 通知提示 -->
+        <div class="notification-toast">
+            <div class="toast-content">
+                <i class="fas fa-seedling toast-icon"></i>
+                <span class="toast-text">向日葵已成熟，可以收获了！</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 种子商店弹窗（示例） -->
+    <div class="modal-overlay" id="seedShopModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <i class="fas fa-seedling modal-title-icon"></i>
+                    种子商店
+                </h2>
+                <button class="modal-close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <!-- 种子商店内容 -->
+                <div class="seed-category-tabs">
+                    <button class="category-tab active" data-category="common">普通种子</button>
+                    <button class="category-tab" data-category="rare">稀有种子</button>
+                    <button class="category-tab" data-category="epic">史诗种子</button>
+                    <button class="category-tab" data-category="legendary">传说种子</button>
+                </div>
+                
+                <div class="seed-grid">
+                    <!-- 种子卡片会通过JS动态生成 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

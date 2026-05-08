@@ -1,0 +1,16 @@
+{
+  "timestamp": "2026-04-12T16:12:32.014Z",
+  "project": "治愈花园合成系统",
+  "testResults": {
+    "total": 7,
+    "passed": 7,
+    "failed": 0,
+    "startTime": 1776010351671
+  },
+  "duration": 0.343,
+  "environment": {
+    "node": "v24.11.1",
+    "platform": "win32",
+    "arch": "x64"
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "engine": "3.8.8",
+  "platform": "web",
+  "build": {
+    "outputName": "auto-healing-garden",
+    "template": "default",
+    "polyfills": true,
+    "sourceMaps": false,
+    "minify": true,
+    "compressTextures": true,
+    "orientation": "portrait",
+    "debug": false
+  },
+  "preview": {
+    "resolution": {
+      "width": 1080,
+      "height": 1920
+    },
+    "orientation": "portrait",
+    "platform": "web"
+  },
+  "assets": {
+    "autoCompress": true,
+    "textureFormat": "jpg",
+    "quality": 80
+  },
+  "modules": {
+    "physics": true,
+    "particle": true,
+    "audio": true,
+    "video": true
+  },
+  "name": "auto-healing-garden",
+  "displayName": "自动治愈花园",
+  "version": "1.0.0",
+  "description": "竖屏治愈系种植休闲小游戏",
+  "author": "AutoHealingGarden Team",
+  "main": "MainScene",
+  "scene": "db://assets/scenes/MainScene.fire",
+  "startScene": "db://assets/scenes/MainScene.fire",
+  "cocos-creator": "3.8.8"
+}

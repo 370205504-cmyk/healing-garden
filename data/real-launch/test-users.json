@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "user-1775564792993-otq68v",
+      "name": "内部测试员1",
+      "email": "tester1@example.com",
+      "phone": "",
+      "group": "A",
+      "addedAt": "2026-04-07T12:26:32.993Z",
+      "invited": true,
+      "invitedAt": "2026-04-07T12:26:32.993Z",
+      "tested": false,
+      "feedback": false
+    },
+    {
+      "id": "user-1775564792993-59yut8",
+      "name": "内部测试员2",
+      "email": "tester2@example.com",
+      "phone": "",
+      "group": "A",
+      "addedAt": "2026-04-07T12:26:32.993Z",
+      "invited": true,
+      "invitedAt": "2026-04-07T12:26:32.993Z",
+      "tested": false,
+      "feedback": false
+    },
+    {
+      "id": "user-1775564792993-gl29xz",
+      "name": "普通用户1",
+      "email": "user1@example.com",
+      "phone": "",
+      "group": "B",
+      "addedAt": "2026-04-07T12:26:32.993Z",
+      "invited": true,
+      "invitedAt": "2026-04-07T12:26:32.993Z",
+      "tested": false,
+      "feedback": false
+    },
+    {
+      "id": "user-1775564792993-ybgh5m",
+      "name": "普通用户2",
+      "email": "user2@example.com",
+      "phone": "",
+      "group": "B",
+      "addedAt": "2026-04-07T12:26:32.993Z",
+      "invited": true,
+      "invitedAt": "2026-04-07T12:26:32.993Z",
+      "tested": false,
+      "feedback": false
+    },
+    {
+      "id": "user-1775564792993-rdecwv",
+      "name": "体验用户1",
+      "email": "visitor1@example.com",
+      "phone": "",
+      "group": "C",
+      "addedAt": "2026-04-07T12:26:32.993Z",
+      "invited": true,
+      "invitedAt": "2026-04-07T12:26:32.993Z",
+      "tested": false,
+      "feedback": false
+    }
+  ]
+}

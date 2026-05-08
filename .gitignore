@@ -1,0 +1,42 @@
+﻿# Dependencies
+game/node_modules/
+server/node_modules/
+node_modules/
+management/node_modules/
+
+# Build output
+game/build/
+dist/
+build/
+outputs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+temp/
+*.log
+*.tmp
+
+# Environment
+.env
+.env.*
+.env.build
+.env.deploy
+!*.env.example
+
+# Runtime
+*.runtimeconfig.json
+*.user
+
+# Library cache
+game/library/
+game/temp/
+game/local/

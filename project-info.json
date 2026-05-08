@@ -1,0 +1,20 @@
+{
+  "project_name": "自动治愈花园 (AutoHealingGarden)",
+  "project_type": "自动化游戏开发流水线",
+  "game_type": "竖屏休闲解压种植游戏",
+  "technology_stack": [
+    "Cocos Creator 3.8.8",
+    "TypeScript",
+    "Python"
+  ],
+  "target_platforms": [
+    "微信小游戏",
+    "抖音小游戏"
+  ],
+  "team_size": 12,
+  "automation_level": "全流程自动化",
+  "budget": 10.0,
+  "timeline_days": 7,
+  "created_at": "2026-04-05",
+  "created_by": "团队总控（主Agent）"
+}

@@ -1,0 +1,314 @@
+{
+  "project_name": "auto-healing-garden",
+  "architecture_version": "1.0.0",
+  "created_at": "2026-04-05",
+  "created_by": "技术总监",
+  
+  "game_engine": {
+    "name": "Cocos Creator",
+    "version": "3.8.8",
+    "reason": "成熟稳定的小游戏开发引擎，TypeScript支持完善，社区活跃",
+    "features": [
+      "2D/3D游戏开发",
+      "TypeScript支持",
+      "多平台发布",
+      "丰富的组件系统",
+      "活跃的社区和文档"
+    ]
+  },
+  
+  "programming_languages": {
+    "frontend": {
+      "language": "TypeScript",
+      "version": "5.0+",
+      "reason": "类型安全，开发效率高，工具链完善，与Cocos Creator完美集成",
+      "features": [
+        "静态类型检查",
+        "现代ES6+特性",
+        "优秀的IDE支持",
+        "丰富的类型定义库"
+      ]
+    },
+    "automation": {
+      "language": "Python",
+      "version": "3.9+",
+      "reason": "自动化脚本生态丰富，开发效率高，跨平台兼容性好",
+      "features": [
+        "丰富的第三方库",
+        "简洁的语法",
+        "强大的自动化能力",
+        "跨平台兼容"
+      ]
+    }
+  },
+  
+  "build_tools": {
+    "bundler": {
+      "name": "Webpack",
+      "version": "5.0+",
+      "reason": "Cocos Creator内置支持，配置灵活，优化效果好",
+      "features": [
+        "代码分割",
+        "资源优化",
+        "热更新支持",
+        "插件生态丰富"
+      ]
+    },
+    "cli": {
+      "name": "Cocos CLI",
+      "version": "与引擎同步",
+      "reason": "官方命令行工具，构建和发布必备",
+      "features": [
+        "项目创建和管理",
+        "构建和发布",
+        "插件管理",
+        "工作流自动化"
+      ]
+    }
+  },
+  
+  "testing_framework": {
+    "unit_testing": {
+      "name": "Jest",
+      "version": "29.0+",
+      "reason": "TypeScript支持好，配置简单，功能全面",
+      "features": [
+        "零配置启动",
+        "快照测试",
+        "覆盖率报告",
+        "模拟功能强大"
+      ]
+    },
+    "e2e_testing": {
+      "name": "Puppeteer",
+      "version": "20.0+",
+      "reason": "Chrome自动化测试，适合小游戏E2E测试",
+      "features": [
+        "真实的浏览器环境",
+        "页面操作自动化",
+        "截图和性能测试",
+        "Headless模式"
+      ]
+    }
+  },
+  
+  "development_tools": {
+    "ide": {
+      "recommended": "Visual Studio Code",
+      "extensions": [
+        "TypeScript and JavaScript Language Features",
+        "Cocos Creator API",
+        "ESLint",
+        "Prettier",
+        "GitLens"
+      ]
+    },
+    "version_control": {
+      "system": "Git",
+      "platform": "GitHub/GitLab",
+      "workflow": "Git Flow",
+      "branch_strategy": {
+        "main": "生产代码",
+        "develop": "开发分支",
+        "feature/*": "功能分支",
+        "hotfix/*": "热修复分支",
+        "release/*": "发布分支"
+      }
+    },
+    "package_manager": {
+      "name": "npm",
+      "version": "8.0+",
+      "reason": "Node.js生态标准，与TypeScript集成好"
+    }
+  },
+  
+  "automation_tools": {
+    "code_generation": {
+      "tool": "自定义Python脚本",
+      "purpose": "基于模板生成TypeScript代码",
+      "features": [
+        "模板驱动开发",
+        "配置数据驱动",
+        "批量生成",
+        "代码质量保证"
+      ]
+    },
+    "resource_generation": {
+      "tool": "AI图像生成 + 自定义处理脚本",
+      "purpose": "自动生成游戏美术资源",
+      "features": [
+        "风格统一控制",
+        "批量生成",
+        "格式转换",
+        "质量优化"
+      ]
+    },
+    "build_automation": {
+      "tool": "Python + PowerShell脚本",
+      "purpose": "自动化构建和发布流程",
+      "features": [
+        "多平台构建",
+        "自动打包",
+        "版本管理",
+        "错误处理"
+      ]
+    }
+  },
+  
+  "third_party_services": {
+    "analytics": {
+      "service": "微信小程序统计 + 自定义分析",
+      "purpose": "用户行为分析和性能监控",
+      "data_collected": [
+        "DAU/MAU",
+        "用户留存",
+        "性能指标",
+        "错误统计"
+      ]
+    },
+    "advertising": {
+      "service": "微信广告联盟",
+      "purpose": "激励视频广告变现",
+      "integration": "微信小游戏广告API",
+      "ad_formats": ["激励视频", "Banner", "插屏"]
+    },
+    "cloud_services": {
+      "service": "微信云开发（可选）",
+      "purpose": "用户数据同步和社交功能",
+      "features": [
+        "数据库",
+        "云函数",
+        "存储",
+        "用户认证"
+      ]
+    }
+  },
+  
+  "performance_requirements": {
+    "frame_rate": {
+      "target": "≥30 FPS",
+      "minimum": "25 FPS",
+      "measurement": "真实设备测试"
+    },
+    "loading_time": {
+      "first_load": "≤5秒",
+      "scene_switch": "≤2秒",
+      "optimization": "资源分块加载，预加载"
+    },
+    "memory_usage": {
+      "target": "≤100MB",
+      "monitoring": "内存泄漏检测，资源及时释放"
+    },
+    "package_size": {
+      "wechat_limit": "≤10MB",
+      "optimization": "资源压缩，代码分割，按需加载"
+    }
+  },
+  
+  "compatibility_requirements": {
+    "platforms": {
+      "primary": "微信小游戏",
+      "secondary": ["抖音小游戏", "H5"],
+      "testing": "真机测试，多设备覆盖"
+    },
+    "devices": {
+      "ios": "iOS 11+",
+      "android": "Android 6.0+",
+      "screen_sizes": "适配720×1280设计，支持多种分辨率"
+    },
+    "browsers": {
+      "chrome": "最新2个版本",
+      "safari": "最新2个版本",
+      "wechat": "微信内置浏览器"
+    }
+  },
+  
+  "security_requirements": {
+    "data_protection": {
+      "local_storage": "AES加密敏感数据",
+      "network": "HTTPS通信",
+      "api": "Token认证和授权"
+    },
+    "privacy_compliance": {
+      "data_collection": "最小化原则，用户同意",
+      "privacy_policy": "明确的数据使用政策",
+      "user_rights": "数据访问、修改、删除权利"
+    },
+    "anti_cheating": {
+      "client_validation": "关键逻辑服务端验证",
+      "data_integrity": "客户端数据校验",
+      "anomaly_detection": "异常行为识别"
+    }
+  },
+  
+  "development_workflow": {
+    "code_style": {
+      "typescript": "使用严格模式，ESLint规则",
+      "naming_convention": "camelCase变量，PascalCase类",
+      "comments": "JSDoc注释，重要逻辑说明"
+    },
+    "testing_strategy": {
+      "unit_tests": "核心函数和类测试",
+      "integration_tests": "模块间接口测试",
+      "e2e_tests": "完整用户流程测试",
+      "coverage_goal": ">80%代码覆盖率"
+    },
+    "deployment_pipeline": {
+      "stages": ["开发", "测试", "预发布", "生产"],
+      "automation": "CI/CD流水线",
+      "quality_gates": ["代码审查", "测试通过", "性能达标"]
+    }
+  },
+  
+  "documentation": {
+    "technical_docs": [
+      "架构设计文档",
+      "API文档",
+      "部署指南",
+      "故障排除手册"
+    ],
+    "development_docs": [
+      "开发环境设置",
+      "代码规范",
+      "测试指南",
+      "发布流程"
+    ],
+    "maintenance_docs": [
+      "监控指南",
+      "备份策略",
+      "升级指南",
+      "应急预案"
+    ]
+  },
+  
+  "risk_mitigation": {
+    "technical_risks": [
+      {
+        "risk": "Cocos Creator版本兼容问题",
+        "mitigation": "版本锁定，充分测试，关注官方更新"
+      },
+      {
+        "risk": "性能不达标",
+        "mitigation": "性能优化专项，持续监控，渐进优化"
+      },
+      {
+        "risk": "自动化流程失败",
+        "mitigation": "手动备用方案，快速恢复机制"
+      }
+    ],
+    "contingency_plans": [
+      {
+        "scenario": "构建失败",
+        "action": "回滚到上一个稳定版本，手动构建"
+      },
+      {
+        "scenario": "性能严重下降",
+        "action": "启用性能降级方案，优先保证核心功能"
+      },
+      {
+        "scenario": "第三方服务异常",
+        "action": "降级到本地功能，服务恢复后同步"
+      }
+    ]
+  }
+}

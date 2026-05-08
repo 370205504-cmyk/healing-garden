@@ -1,0 +1,70 @@
+{
+  "__type__": "cc.Prefab",
+  "_name": "PlantPrefab",
+  "_objFlags": 0,
+  "_native": "",
+  "data": {
+    "__type__": "cc.Node",
+    "_name": "Plant",
+    "_objFlags": 0,
+    "_native": "",
+    "_children": [],
+    "_active": true,
+    "_components": [
+      {
+        "__type__": "cc.Sprite",
+        "_name": "",
+        "_objFlags": 0,
+        "_native": "",
+        "_enabled": true,
+        "color": {
+          "__type__": "cc.Color",
+          "r": 100,
+          "g": 200,
+          "b": 100,
+          "a": 255
+        },
+        "spriteFrame": null,
+        "type": 0,
+        "sizeMode": 1,
+        "fillType": 0,
+        "fillCenter": {
+          "__type__": "cc.Vec2",
+          "x": 0,
+          "y": 0
+        },
+        "fillStart": 0,
+        "fillRange": 360,
+        "trim": true
+      }
+    ],
+    "_prefab": {
+      "root": {
+        "__id__": 1
+      },
+      "asset": {
+        "__uuid__": "plant-prefab-uuid"
+      }
+    },
+    "_position": {
+      "__type__": "cc.Vec3",
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "_rotation": {
+      "__type__": "cc.Quat",
+      "x": 0,
+      "y": 0,
+      "z": 0,
+      "w": 1
+    },
+    "_scale": {
+      "__type__": "cc.Vec3",
+      "x": 1,
+      "y": 1,
+      "z": 1
+    }
+  },
+  "asyncLoadAssets": false
+}

@@ -1,0 +1,20 @@
+{
+  "name": "auto-healing-garden",
+  "version": "1.0.0",
+  "description": "自动治愈花园",
+  "main": "main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^8.0.0"
+  },
+  "scripts": {
+    "build:web": "echo '请使用Cocos Creator构建Web平台'",
+    "build:wechat": "echo '请使用Cocos Creator构建微信小游戏平台'",
+    "build:douyin": "echo '请使用Cocos Creator构建抖音小游戏平台'",
+    "clean": "rm -rf build/* dist/*",
+    "prebuild": "npm run clean",
+    "postbuild": "echo '构建完成'"
+  }
+}

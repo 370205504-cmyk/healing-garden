@@ -1,0 +1,62 @@
+{
+  "feedbacks": [
+    {
+      "id": "feedback-1775567373604-94k8wr",
+      "userName": "质量测试员1",
+      "timestamp": "2026-04-07T13:09:33.604Z",
+      "overallRating": 5,
+      "summary": "游戏体验非常棒，治愈效果明显",
+      "issues": [
+        "加载速度可以再快一点"
+      ],
+      "suggestions": "增加更多植物种类",
+      "status": "processed"
+    },
+    {
+      "id": "feedback-1775567373604-2qfeel",
+      "userName": "质量测试员2",
+      "timestamp": "2026-04-07T13:09:33.604Z",
+      "overallRating": 4,
+      "summary": "界面美观，操作流畅",
+      "issues": [
+        "部分界面元素较小"
+      ],
+      "suggestions": "优化移动端适配",
+      "status": "processed"
+    },
+    {
+      "id": "feedback-1775567373604-brv3vf",
+      "userName": "普通玩家1",
+      "timestamp": "2026-04-07T13:09:33.604Z",
+      "overallRating": 5,
+      "summary": "放松效果很好，适合减压",
+      "issues": [],
+      "suggestions": "增加背景音乐选择",
+      "status": "processed"
+    },
+    {
+      "id": "feedback-1775567373604-s8f3na",
+      "userName": "普通玩家2",
+      "timestamp": "2026-04-07T13:09:33.604Z",
+      "overallRating": 4,
+      "summary": "种植系统很有趣",
+      "issues": [
+        "新手引导可以更详细"
+      ],
+      "suggestions": "增加成就系统",
+      "status": "processed"
+    },
+    {
+      "id": "feedback-1775567373604-pj44qr",
+      "userName": "体验用户1",
+      "timestamp": "2026-04-07T13:09:33.604Z",
+      "overallRating": 4,
+      "summary": "整体体验不错",
+      "issues": [
+        "偶尔有卡顿"
+      ],
+      "suggestions": "优化性能",
+      "status": "processed"
+    }
+  ]
+}

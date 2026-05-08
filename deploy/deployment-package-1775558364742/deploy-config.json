@@ -1,0 +1,11 @@
+{
+  "deploymentId": "deploy-1775558364758",
+  "timestamp": "2026-04-07T10:39:24.758Z",
+  "version": "1.0.0-production",
+  "platforms": [
+    "web",
+    "wechat",
+    "douyin"
+  ],
+  "status": "deployed"
+}

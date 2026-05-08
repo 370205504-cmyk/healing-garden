@@ -1,0 +1,88 @@
+# Prometheus监控配置 - 《自动治愈花园》
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'autohealinggarden'
+    environment: 'production'
+
+# 告警规则文件
+rule_files:
+  - "alerts.yml"
+
+# 抓取配置
+scrape_configs:
+  # Prometheus自身监控
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+    metrics_path: '/metrics'
+
+  # 游戏服务器监控
+  - job_name: 'game-server'
+    static_configs:
+      - targets: 
+        - 'api.autohealinggarden.com:3000'
+        - 'api.autohealinggarden.com:3001'
+        - 'api.autohealinggarden.com:3002'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+    scrape_timeout: 25s
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: instance
+      - source_labels: [__meta_environment]
+        target_label: environment
+
+  # Node.js应用指标
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: 
+        - 'server1.autohealinggarden.com:9100'
+        - 'server2.autohealinggarden.com:9100'
+        - 'server3.autohealinggarden.com:9100'
+    scrape_interval: 30s
+
+  # MongoDB监控
+  - job_name: 'mongodb-exporter'
+    static_configs:
+      - targets: ['mongodb-exporter.autohealinggarden.com:9216']
+    scrape_interval: 30s
+
+  # Redis监控
+  - job_name: 'redis-exporter'
+    static_configs:
+      - targets: ['redis-exporter.autohealinggarden.com:9121']
+    scrape_interval: 30s
+
+  # 黑盒监控（外部可用性检查）
+  - job_name: 'blackbox'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+        - 'https://game.autohealinggarden.com'   # Web游戏
+        - 'https://api.autohealinggarden.com/health'  # API健康检查
+        - 'https://wechat.autohealinggarden.com'  # 微信小游戏后端
+        - 'https://douyin.autohealinggarden.com'  # 抖音小游戏后端
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter.autohealinggarden.com:9115
+
+# 远程写入配置（如使用Thanos或VictoriaMetrics）
+remote_write:
+  - url: "http://thanos-receive.autohealinggarden.com:10908/api/v1/receive"
+    write_relabel_configs:
+      - source_labels: [environment]
+        regex: production
+        action: keep
+
+# 远程读取配置
+remote_read:
+  - url: "http://thanos-query.autohealinggarden.com:10902/api/v1/read"
+    read_recent: true

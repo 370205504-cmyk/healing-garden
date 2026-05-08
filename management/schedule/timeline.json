@@ -1,0 +1,250 @@
+{
+  "project_name": "auto-healing-garden",
+  "timeline_version": "1.0.0",
+  "created_at": "2026-04-05",
+  "created_by": "项目经理",
+  
+  "overview": {
+    "total_days": 7,
+    "start_date": "2026-04-05",
+    "end_date": "2026-04-11",
+    "status": "in_progress",
+    "current_day": 1,
+    "progress_percentage": 15
+  },
+  
+  "phases": [
+    {
+      "id": "phase_1",
+      "name": "基础架构搭建",
+      "description": "建立自动化流水线基础架构，完成所有设计文档",
+      "start_date": "2026-04-05",
+      "end_date": "2026-04-06",
+      "duration_days": 2,
+      "status": "in_progress",
+      "progress_percentage": 50,
+      "budget_allocation": 2.0,
+      "budget_used": 0.8,
+      "key_deliverables": [
+        "自动化流水线总控方案",
+        "12岗位配置文档",
+        "游戏设计文档",
+        "技术架构文档",
+        "成本控制模型",
+        "UI设计规范",
+        "项目开发计划"
+      ],
+      "critical_tasks": [
+        {
+          "id": "task_1_1",
+          "name": "项目总体规划",
+          "status": "completed",
+          "completed_date": "2026-04-05",
+          "owner": "团队总控"
+        },
+        {
+          "id": "task_1_2",
+          "name": "游戏设计文档",
+          "status": "completed",
+          "completed_date": "2026-04-05",
+          "owner": "产品经理"
+        },
+        {
+          "id": "task_1_3",
+          "name": "成本控制模型",
+          "status": "completed",
+          "completed_date": "2026-04-05",
+          "owner": "预算与成本控制师"
+        },
+        {
+          "id": "task_1_4",
+          "name": "技术架构设计",
+          "status": "completed",
+          "completed_date": "2026-04-05",
+          "owner": "技术总监"
+        },
+        {
+          "id": "task_1_5",
+          "name": "UI设计规范",
+          "status": "completed",
+          "completed_date": "2026-04-05",
+          "owner": "UI/UX设计师"
+        },
+        {
+          "id": "task_1_6",
+          "name": "项目开发计划",
+          "status": "completed",
+          "completed_date": "2026-04-05",
+          "owner": "项目经理"
+        },
+        {
+          "id": "task_1_7",
+          "name": "自动化流水线框架",
+          "status": "in_progress",
+          "progress_percentage": 60,
+          "owner": "技术总监",
+          "dependencies": ["task_1_3", "task_1_4"]
+        }
+      ]
+    },
+    {
+      "id": "phase_2",
+      "name": "核心系统开发",
+      "description": "实现游戏核心功能：种植系统、花园系统、经济系统",
+      "start_date": "2026-04-07",
+      "end_date": "2026-04-08",
+      "duration_days": 2,
+      "status": "planned",
+      "progress_percentage": 0,
+      "budget_allocation": 5.0,
+      "budget_used": 0.0,
+      "key_deliverables": [
+        "种植系统完整代码",
+        "花园系统完整代码",
+        "经济系统完整代码",
+        "基础UI界面",
+        "本地数据存储方案"
+      ],
+      "dependencies": ["phase_1"],
+      "critical_tasks": [
+        {
+          "id": "task_2_1",
+          "name": "Cocos项目创建与配置",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_1_7"]
+        },
+        {
+          "id": "task_2_2",
+          "name": "种植系统开发",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_2_1"]
+        },
+        {
+          "id": "task_2_3",
+          "name": "花园系统开发",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_2_2"]
+        },
+        {
+          "id": "task_2_4",
+          "name": "经济系统开发",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_2_2", "task_2_3"]
+        }
+      ]
+    },
+    {
+      "id": "phase_3",
+      "name": "功能模块实现",
+      "description": "完成扩展功能模块：任务系统、商店系统、社交系统",
+      "start_date": "2026-04-09",
+      "end_date": "2026-04-09",
+      "duration_days": 1,
+      "status": "planned",
+      "progress_percentage": 0,
+      "budget_allocation": 1.5,
+      "budget_used": 0.0,
+      "key_deliverables": [
+        "任务系统完整代码",
+        "商店系统完整代码",
+        "社交系统完整代码",
+        "完整音效资源",
+        "广告系统集成"
+      ],
+      "dependencies": ["phase_2"],
+      "critical_tasks": [
+        {
+          "id": "task_3_1",
+          "name": "任务系统开发",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_2_4"]
+        },
+        {
+          "id": "task_3_2",
+          "name": "商店系统开发",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_3_1"]
+        },
+        {
+          "id": "task_3_3",
+          "name": "社交系统开发",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_3_2"]
+        },
+        {
+          "id": "task_3_4",
+          "name": "音效系统集成",
+          "status": "pending",
+          "owner": "Cocos开发工程师",
+          "dependencies": ["task_3_3"]
+        }
+      ]
+    },
+    {
+      "id": "phase_4",
+      "name": "测试与优化",
+      "description": "质量保证和性能优化：自动化测试、性能优化、兼容性测试",
+      "start_date": "2026-04-10",
+      "end_date": "2026-04-10",
+      "duration_days": 1,
+      "status": "planned",
+      "progress_percentage": 0,
+      "budget_allocation": 1.0,
+      "budget_used": 0.0,
+      "key_deliverables": [
+        "测试报告",
+        "性能优化报告",
+        "兼容性报告",
+        "用户体验报告",
+        "合规审核报告"
+      ],
+      "dependencies": ["phase_3"],
+      "critical_tasks": [
+        {
+          "id": "task_4_1",
+          "name": "自动化功能测试",
+          "status": "pending",
+          "owner": "测试工程师",
+          "dependencies": ["task_3_4"]
+        },
+        {
+          "id": "task_4_2",
+          "name": "性能测试与优化",
+          "status": "pending",
+          "owner": "测试工程师",
+          "dependencies": ["task_4_1"]
+        },
+        {
+          "id": "task_4_3",
+          "name": "兼容性测试",
+          "status": "pending",
+          "owner": "测试工程师",
+          "dependencies": ["task_4_2"]
+        },
+        {
+          "id": "task_4_4",
+          "name": "合规审核",
+          "status": "pending",
+          "owner": "审核专员",
+          "dependencies": ["task_4_3"]
+        }
+      ]
+    },
+    {
+      "id": "phase_5",
+      "name": "构建与交付",
+      "description": "完成构建打包和上架交付：多平台构建、上架提报、项目总结",
+      "start_date": "2026-04-11",
+      "end_date": "2026-04-11",
+      "duration_days": 1,
+      "status": "planned",
+      "progress_percentage": 0,
+      "budget_allocation": 0.5,
+      "budget_used": 0.0,

@@ -1,0 +1,29 @@
+{
+  "service": "auto-healing-garden",
+  "version": "1.0.0-production",
+  "deployedAt": "2026-04-07T10:39:24.766Z",
+  "endpoints": [
+    {
+      "name": "web平台",
+      "url": "/",
+      "type": "static"
+    },
+    {
+      "name": "API服务",
+      "url": "/api/users",
+      "type": "api"
+    }
+  ],
+  "alerts": {
+    "enabled": true,
+    "channels": [
+      "log",
+      "email"
+    ],
+    "thresholds": {
+      "responseTime": 1000,
+      "errorRate": 0.01,
+      "availability": 0.995
+    }
+  }
+}

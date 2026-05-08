@@ -1,0 +1,13 @@
+{
+  "engine": "cocos-creator",
+  "engineVersion": "3.8.8",
+  "projectType": "2d",
+  "designResolution": {
+    "width": 720,
+    "height": 1280
+  },
+  "startScene": "db://assets/scenes/main.fire",
+  "scenes": [
+    "db://assets/scenes/main.fire"
+  ]
+}

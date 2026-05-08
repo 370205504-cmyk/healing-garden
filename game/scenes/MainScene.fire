@@ -1,0 +1,380 @@
+{
+  "__type__": "cc.SceneAsset",
+  "_name": "MainScene",
+  "_objFlags": 0,
+  "_native": "",
+  "scene": {
+    "__type__": "cc.Scene",
+    "_name": "MainScene",
+    "_objFlags": 0,
+    "_native": "",
+    "autoReleaseAssets": false,
+    "_components": [
+      {
+        "__type__": "cc.Canvas",
+        "_name": "",
+        "_objFlags": 0,
+        "_native": "",
+        "_enabled": true,
+        "alignWithScreen": true,
+        "camera": {
+          "__id__": 1
+        },
+        "designHeight": 1280,
+        "designWidth": 720,
+        "fitHeight": false,
+        "fitWidth": true,
+        "node": {
+          "__id__": 2
+        }
+      }
+    ],
+    "_nodes": [
+      {
+        "__id__": 2,
+        "__type__": "cc.Node",
+        "_name": "Canvas",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [
+          {
+            "__id__": 3
+          },
+          {
+            "__id__": 4
+          },
+          {
+            "__id__": 5
+          },
+          {
+            "__id__": 6
+          },
+          {
+            "__id__": 7
+          },
+          {
+            "__id__": 8
+          }
+        ],
+        "_active": true,
+        "_components": [
+          {
+            "__id__": 9
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "__id__": 3,
+        "__type__": "cc.Node",
+        "_name": "GameManager",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [],
+        "_active": true,
+        "_components": [
+          {
+            "__type__": "cc.Script",
+            "_name": "",
+            "_objFlags": 0,
+            "_native": "",
+            "_enabled": true,
+            "node": {
+              "__id__": 3
+            },
+            "__scriptKey": "GameManager"
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "__id__": 4,
+        "__type__": "cc.Node",
+        "_name": "PlantingSystem",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [],
+        "_active": true,
+        "_components": [
+          {
+            "__type__": "cc.Script",
+            "_name": "",
+            "_objFlags": 0,
+            "_native": "",
+            "_enabled": true,
+            "node": {
+              "__id__": 4
+            },
+            "__scriptKey": "PlantingSystem"
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "__id__": 5,
+        "__type__": "cc.Node",
+        "_name": "GardenSystem",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [],
+        "_active": true,
+        "_components": [
+          {
+            "__type__": "cc.Script",
+            "_name": "",
+            "_objFlags": 0,
+            "_native": "",
+            "_enabled": true,
+            "node": {
+              "__id__": 5
+            },
+            "__scriptKey": "GardenSystem"
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "__id__": 6,
+        "__type__": "cc.Node",
+        "_name": "EconomySystem",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [],
+        "_active": true,
+        "_components": [
+          {
+            "__type__": "cc.Script",
+            "_name": "",
+            "_objFlags": 0,
+            "_native": "",
+            "_enabled": true,
+            "node": {
+              "__id__": 6
+            },
+            "__scriptKey": "EconomySystem"
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "__id__": 7,
+        "__type__": "cc.Node",
+        "_name": "UIManager",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [],
+        "_active": true,
+        "_components": [
+          {
+            "__type__": "cc.Script",
+            "_name": "",
+            "_objFlags": 0,
+            "_native": "",
+            "_enabled": true,
+            "node": {
+              "__id__": 7
+            },
+            "__scriptKey": "UIManager"
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      },
+      {
+        "__id__": 8,
+        "__type__": "cc.Node",
+        "_name": "MainSceneController",
+        "_objFlags": 0,
+        "_native": "",
+        "_children": [],
+        "_active": true,
+        "_components": [
+          {
+            "__type__": "cc.Script",
+            "_name": "",
+            "_objFlags": 0,
+            "_native": "",
+            "_enabled": true,
+            "node": {
+              "__id__": 8
+            },
+            "__scriptKey": "MainScene"
+          }
+        ],
+        "_prefab": null,
+        "_position": {
+          "__type__": "cc.Vec3",
+          "x": 0,
+          "y": 0,
+          "z": 0
+        },
+        "_rotation": {
+          "__type__": "cc.Quat",
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 1
+        },
+        "_scale": {
+          "__type__": "cc.Vec3",
+          "x": 1,
+          "y": 1,
+          "z": 1
+        }
+      }
+    ],
+    "_cameras": [
+      {
+        "__id__": 1,
+        "__type__": "cc.Camera",
+        "_name": "",
+        "_objFlags": 0,
+        "_native": "",
+        "_enabled": true,
+        "alignWithScreen": true,
+        "clearColor": {
+          "__type__": "cc.Color",
+          "r": 50,
+          "g": 120,
+          "b": 80,
+          "a": 255
+        },
+        "clearDepth": 1,
+        "clearFlags": 2,
+        "clearStencil": 0,
+        "fov": 45,
+        "near": 1,
+        "far": 1000,
+        "orthoHeight": 640,
+        "projection": 1,
+        "priority": 0,
+        "rect": {
+          "__type__": "cc.Rect",
+          "x": 0,
+          "y": 0,
+          "width": 1,
+          "height": 1
+        },
+        "targetTexture": null,
+        "visibility": 4294967295,
+        "zoomRatio": 1,
+        "node": {
+          "__id__": 2
+        }
+      }
+    ]
+  }
+}

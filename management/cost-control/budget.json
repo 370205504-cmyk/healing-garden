@@ -1,0 +1,150 @@
+{
+  "project": "auto-healing-garden",
+  "total_budget": 10.0,
+  "currency": "CNY",
+  "created_at": "2026-04-05T14:20:00",
+  "created_by": "预算与成本控制师",
+  "game_complexity": "中高",
+  "budget_allocation": {
+    "stage_1_foundation": {
+      "name": "基础架构搭建",
+      "description": "自动化流水线基础架构，12岗位配置",
+      "percentage": 0.20,
+      "budget": 2.0,
+      "time_days": 2,
+      "priority": "高"
+    },
+    "stage_2_development": {
+      "name": "核心开发阶段",
+      "description": "游戏核心功能开发，6大系统实现",
+      "percentage": 0.50,
+      "budget": 5.0,
+      "time_days": 3,
+      "priority": "高"
+    },
+    "stage_3_testing": {
+      "name": "测试验证阶段",
+      "description": "自动化测试，性能优化，合规审核",
+      "percentage": 0.15,
+      "budget": 1.5,
+      "time_days": 1,
+      "priority": "中"
+    },
+    "stage_4_delivery": {
+      "name": "交付部署阶段",
+      "description": "构建打包，上架提报，项目交付",
+      "percentage": 0.10,
+      "budget": 1.0,
+      "time_days": 1,
+      "priority": "中"
+    },
+    "stage_5_contingency": {
+      "name": "应急储备",
+      "description": "风险应对，意外处理，缓冲空间",
+      "percentage": 0.05,
+      "budget": 0.5,
+      "time_days": 0,
+      "priority": "低"
+    }
+  },
+  "cost_control_model": {
+    "monitoring_metrics": {
+      "real_time_cost": {
+        "description": "实时成本监控",
+        "frequency": "每小时",
+        "thresholds": {
+          "warning": 0.8,
+          "critical": 0.9
+        }
+      },
+      "cost_per_role": {
+        "description": "岗位成本分析",
+        "frequency": "每日",
+        "analysis": "比较实际成本与估算成本"
+      },
+      "roi_tracking": {
+        "description": "投资回报率跟踪",
+        "frequency": "阶段结束",
+        "metrics": [
+          "成本效益比",
+          "时间回报率",
+          "质量回报率"
+        ]
+      }
+    },
+    "control_mechanisms": {
+      "budget_alert": {
+        "description": "预算预警机制",
+        "triggers": [
+          "超预算风险",
+          "进度延迟",
+          "质量下降"
+        ],
+        "actions": [
+          "调整分配",
+          "优化流程",
+          "启用应急储备"
+        ]
+      },
+      "cost_optimization": {
+        "description": "成本优化策略",
+        "strategies": [
+          "prompt缓存",
+          "模板复用",
+          "自动化效率提升",
+          "资源优化"
+        ]
+      },
+      "risk_mitigation": {
+        "description": "风险缓解措施",
+        "measures": [
+          "备用方案",
+          "进度缓冲",
+          "预算缓冲",
+          "技术降级"
+        ]
+      }
+    },
+    "reporting_framework": {
+      "daily_report": {
+        "content": [
+          "当日成本",
+          "累计成本",
+          "预算剩余",
+          "成本趋势"
+        ],
+        "format": "JSON + Markdown"
+      },
+      "stage_report": {
+        "content": [
+          "阶段成本总结",
+          "ROI分析",
+          "经验教训",
+          "改进建议"
+        ],
+        "format": "详细报告"
+      },
+      "final_report": {
+        "content": [
+          "总成本分析",
+          "预算执行情况",
+          "成本效益评估",
+          "经验总结"
+        ],
+        "format": "综合报告"
+      }
+    }
+  },
+  "assumptions": [
+    "全程prompt缓存开启，减少无效Token消耗",
+    "通用模板强制复用，避免重复开发",
+    "自动化流程优化，减少人工耗时",
+    "实时监控预警，及时调整策略"
+  ],
+  "constraints": [
+    "总预算不得超过10元",
+    "任何成本超支10%必须立即预警",
+    "应急储备仅用于风险应对",
+    "所有成本必须有明确记录和理由"
+  ]
+}

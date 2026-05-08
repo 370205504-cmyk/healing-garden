@@ -1,0 +1,186 @@
+# 《自动治愈花园》Prometheus告警规则
+groups:
+  # 服务器资源告警
+  - name: server_resources
+    rules:
+      - alert: HighCPUUsage
+        expr: 100 - (avg by(instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "高CPU使用率 ({{ $value }}%)"
+          description: "实例 {{ $labels.instance }} CPU使用率持续高于80%超过5分钟"
+          
+      - alert: HighMemoryUsage
+        expr: (node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "高内存使用率 ({{ $value }}%)"
+          description: "实例 {{ $labels.instance }} 内存使用率持续高于85%超过5分钟"
+          
+      - alert: HighDiskUsage
+        expr: (node_filesystem_size_bytes{fstype!="tmpfs"} - node_filesystem_free_bytes{fstype!="tmpfs"}) / node_filesystem_size_bytes{fstype!="tmpfs"} * 100 > 90
+        for: 10m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "高磁盘使用率 ({{ $value }}%)"
+          description: "实例 {{ $labels.instance }} 磁盘使用率持续高于90%超过10分钟"
+          
+      - alert: ServerDown
+        expr: up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "服务器宕机"
+          description: "实例 {{ $labels.instance }} 无法访问超过1分钟"
+
+  # 游戏服务告警
+  - name: game_service
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{status=~"5.."}[5m]) / rate(http_requests_total[5m]) * 100 > 5
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "高错误率 ({{ $value }}%)"
+          description: "HTTP错误率超过5%持续5分钟"
+          
+      - alert: HighResponseTime
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket[5m])) > 2
+        for: 5m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "高响应时间 ({{ $value }}秒)"
+          description: "95%请求响应时间超过2秒持续5分钟"
+          
+      - alert: LowRequestRate
+        expr: rate(http_requests_total[10m]) < 10
+        for: 10m
+        labels:
+          severity: warning
+          team: backend
+        annotations:
+          summary: "低请求率 ({{ $value }} req/min)"
+          description: "请求率低于10次/分钟持续10分钟，可能服务异常"
+          
+      - alert: APIHealthCheckFailed
+        expr: probe_success == 0
+        for: 2m
+        labels:
+          severity: critical
+          team: backend
+        annotations:
+          summary: "API健康检查失败"
+          description: "API健康检查连续失败2分钟"
+
+  # 数据库告警
+  - name: database
+    rules:
+      - alert: MongoDBConnectionError
+        expr: mongodb_up == 0
+        for: 2m
+        labels:
+          severity: critical
+          team: database
+        annotations:
+          summary: "MongoDB连接失败"
+          description: "MongoDB无法连接超过2分钟"
+          
+      - alert: MongoDBHighConnections
+        expr: mongodb_connections_current > 500
+        for: 5m
+        labels:
+          severity: warning
+          team: database
+        annotations:
+          summary: "MongoDB高连接数 ({{ $value }})"
+          description: "MongoDB当前连接数超过500持续5分钟"
+          
+      - alert: RedisDown
+        expr: redis_up == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: database
+        annotations:
+          summary: "Redis服务宕机"
+          description: "Redis无法访问超过1分钟"
+          
+      - alert: RedisHighMemoryUsage
+        expr: redis_memory_used_bytes / redis_memory_max_bytes * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          team: database
+        annotations:
+          summary: "Redis高内存使用率 ({{ $value }}%)"
+          description: "Redis内存使用率超过85%持续5分钟"
+
+  # 业务指标告警
+  - name: business_metrics
+    rules:
+      - alert: LowNewUsers
+        expr: rate(user_registrations_total[1h]) < 5
+        for: 2h
+        labels:
+          severity: warning
+          team: product
+        annotations:
+          summary: "新用户注册率低 ({{ $value }} 用户/小时)"
+          description: "每小时新用户注册数低于5持续2小时"
+          
+      - alert: HighUserChurn
+        expr: rate(user_sessions_total[1h]) / rate(user_registrations_total[24h]) * 100 < 30
+        for: 3h
+        labels:
+          severity: warning
+          team: product
+        annotations:
+          summary: "用户流失率高 ({{ $value }}%)"
+          description: "用户活跃率低于30%持续3小时"
+          
+      - alert: AdRevenueDrop
+        expr: rate(ad_revenue_total[1h]) / rate(ad_revenue_total[24h:1h]) * 100 < 50
+        for: 2h
+        labels:
+          severity: critical
+          team: business
+        annotations:
+          summary: "广告收入大幅下降 ({{ $value }}%)"
+          description: "广告收入相比24小时前下降超过50%持续2小时"
+
+  # 部署和版本告警
+  - name: deployment
+    rules:
+      - alert: DeploymentFailed
+        expr: deployment_status == 0
+        for: 5m
+        labels:
+          severity: critical
+          team: devops
+        annotations:
+          summary: "部署失败"
+          description: "最新部署失败，需要立即检查"
+          
+      - alert: VersionMismatch
+        expr: count by(service_name) (app_version) > 1
+        for: 10m
+        labels:
+          severity: warning
+          team: devops
+        annotations:
+          summary: "服务版本不一致"
+          description: "同一服务有多个版本在运行，可能部署异常"

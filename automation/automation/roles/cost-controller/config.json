@@ -1,0 +1,14 @@
+{
+  "role_id": "cost-controller",
+  "role_name": "预算与成本控制师",
+  "description": "负责成本核算、预算控制、ROI分析",
+  "dependencies": [],
+  "outputs": [
+    "management/cost-control/budget.json",
+    "management/cost-control/cost_report.md"
+  ],
+  "time_estimate": 0.5,
+  "cost_estimate": 0.1,
+  "created_at": "2026-04-05",
+  "version": "1.0.0"
+}

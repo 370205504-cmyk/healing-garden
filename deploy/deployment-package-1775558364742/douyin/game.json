@@ -1,0 +1,8 @@
+{
+  "deviceOrientation": "portrait",
+  "showStatusBar": false,
+  "ttGameConfig": {
+    "platform": "bytedance",
+    "packageName": "com.example.autohealinggarden"
+  }
+}
