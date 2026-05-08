@@ -62,6 +62,51 @@ const Platform = (function () {
     createBannerAd(adUnitId) {
       const targetApi = env === 'wx' ? wx : tt;
       return targetApi.createBannerAd({ adUnitId });
+    },
+
+    // Canvas 创建
+    createCanvas() {
+      const targetApi = env === 'wx' ? wx : tt;
+      if (targetApi && targetApi.createCanvas) {
+        return targetApi.createCanvas();
+      }
+      return null;
+    },
+
+    // requestAnimationFrame 统一接口
+    requestAnimationFrame(callback) {
+      const targetApi = env === 'wx' ? wx : tt;
+      if (targetApi && targetApi.requestAnimationFrame) {
+        return targetApi.requestAnimationFrame(callback);
+      }
+      if (typeof requestAnimationFrame !== 'undefined') {
+        return requestAnimationFrame(callback);
+      }
+      return setTimeout(callback, 16);
+    },
+
+    // 触摸事件绑定
+    onTouchStart(callback) {
+      const targetApi = env === 'wx' ? wx : tt;
+      if (targetApi && targetApi.onTouchStart) {
+        targetApi.onTouchStart(callback);
+      }
+    },
+
+    // 显示事件
+    onShow(callback) {
+      const targetApi = env === 'wx' ? wx : tt;
+      if (targetApi && targetApi.onShow) {
+        targetApi.onShow(callback);
+      }
+    },
+
+    // 全局错误捕获
+    onError(callback) {
+      const targetApi = env === 'wx' ? wx : tt;
+      if (targetApi && targetApi.onError) {
+        targetApi.onError(callback);
+      }
     }
   };
 })();

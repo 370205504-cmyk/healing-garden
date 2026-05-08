@@ -19,13 +19,10 @@
 }();
 
 // 全局错误捕获 防止游戏卡死
-const errorCatchApi = typeof wx !== 'undefined' ? wx : tt;
-if (errorCatchApi && errorCatchApi.onError) {
-  errorCatchApi.onError(function(err) {
-    console.error('游戏运行错误（已自动捕获）:', err);
-    return true;
-  });
-}
+Platform.onError(function(err) {
+  console.error('游戏运行错误（已自动捕获）:', err);
+  return true;
+});
 
 // 引入双平台统一适配层
 try {
@@ -158,27 +155,15 @@ const GameState = {
   // 保存游戏状态
   save() {
     try {
-      if (typeof wx !== 'undefined' && wx.setStorageSync) {
-        wx.setStorageSync('healing_garden_state', {
-          level: this.level,
-          coins: this.coins,
-          exp: this.exp,
-          expToNextLevel: this.expToNextLevel,
-          unlockedPlots: this.unlockedPlots,
-          flowers: this.flowers,
-          lastUpdateTime: this.lastUpdateTime
-        });
-      } else if (typeof tt !== 'undefined' && tt.setStorageSync) {
-        tt.setStorageSync('healing_garden_state', {
-          level: this.level,
-          coins: this.coins,
-          exp: this.exp,
-          expToNextLevel: this.expToNextLevel,
-          unlockedPlots: this.unlockedPlots,
-          flowers: this.flowers,
-          lastUpdateTime: this.lastUpdateTime
-        });
-      }
+      Platform.setStorage('healing_garden_state', {
+        level: this.level,
+        coins: this.coins,
+        exp: this.exp,
+        expToNextLevel: this.expToNextLevel,
+        unlockedPlots: this.unlockedPlots,
+        flowers: this.flowers,
+        lastUpdateTime: this.lastUpdateTime
+      });
     } catch (e) {
       console.error('保存游戏状态未成功：', e);
     }
@@ -187,12 +172,7 @@ const GameState = {
   // 加载游戏状态
   load() {
     try {
-      let savedData = null;
-      if (typeof wx !== 'undefined' && wx.getStorageSync) {
-        savedData = wx.getStorageSync('healing_garden_state');
-      } else if (typeof tt !== 'undefined' && tt.getStorageSync) {
-        savedData = tt.getStorageSync('healing_garden_state');
-      }
+      let savedData = Platform.getStorage('healing_garden_state', null);
       
       if (savedData) {
         this.level = this.safeGet(savedData, 'level', 1);
@@ -436,14 +416,11 @@ class HealingGardenGame {
   // 创建Canvas
   createCanvas() {
     try {
-      if (typeof wx !== 'undefined' && wx.createCanvas) {
-        this.canvas = wx.createCanvas();
+      this.canvas = Platform.createCanvas();
+      
+      if (this.canvas) {
         this.ctx = this.canvas.getContext('2d');
-        console.log('微信环境Canvas创建成功');
-      } else if (typeof tt !== 'undefined' && tt.createCanvas) {
-        this.canvas = tt.createCanvas();
-        this.ctx = this.canvas.getContext('2d');
-        console.log('抖音环境Canvas创建成功');
+        console.log(`${Platform.env}环境Canvas创建成功`);
       } else {
         console.warn('无法创建Canvas，使用模拟环境继续运行');
         // 为测试目的创建虚拟Canvas上下文
@@ -576,9 +553,7 @@ class HealingGardenGame {
     };
     
     // 使用平台兼容的requestAnimationFrame
-    const raf = typeof wx !== 'undefined' ? wx.requestAnimationFrame : 
-                typeof tt !== 'undefined' ? tt.requestAnimationFrame :
-                requestAnimationFrame;
+    const raf = Platform.requestAnimationFrame;
     
     if (raf) {
       this.animationFrameId = raf(gameLoop);
@@ -598,9 +573,7 @@ class HealingGardenGame {
       this.renderRequested = true;
       
       // 使用平台兼容的requestAnimationFrame
-      const raf = typeof wx !== 'undefined' ? wx.requestAnimationFrame : 
-                  typeof tt !== 'undefined' ? tt.requestAnimationFrame :
-                  requestAnimationFrame;
+      const raf = Platform.requestAnimationFrame;
       
       if (raf) {
         raf(() => {
@@ -2223,47 +2196,28 @@ function initGame() {
 
 // 绑定触摸事件
 function bindTouchEvents() {
-  // 微信环境
-  if (typeof wx !== 'undefined') {
-    wx.onTouchStart(function(e) {
-      if (gameInstance && e.touches && e.touches[0]) {
-        const touch = e.touches[0];
-        gameInstance.handleTouchStart(touch.clientX, touch.clientY);
-      }
-    });
-    console.log('微信触摸事件绑定成功');
-  }
-  
-  // 抖音环境
-  if (typeof tt !== 'undefined') {
-    tt.onTouchStart(function(e) {
-      if (gameInstance && e.touches && e.touches[0]) {
-        const touch = e.touches[0];
-        gameInstance.handleTouchStart(touch.clientX, touch.clientY);
-      }
-    });
-    console.log('抖音触摸事件绑定成功');
-  }
+  Platform.onTouchStart(function(e) {
+    if (gameInstance && e.touches && e.touches[0]) {
+      const touch = e.touches[0];
+      gameInstance.handleTouchStart(touch.clientX, touch.clientY);
+    }
+  });
+  console.log(`触摸事件绑定成功 (${Platform.env})`);
 }
 
 // 页面加载完成后启动游戏
-if (typeof wx !== 'undefined') {
-  // 微信环境
-  wx.onShow(function() {
-    console.log('微信小游戏显示，启动游戏');
+Platform.onShow(function() {
+  console.log(`小游戏显示 (${Platform.env})，启动游戏`);
+  initGame();
+});
+
+// 降级：如果 onShow 未触发，直接启动
+setTimeout(function() {
+  if (!gameInstance) {
+    console.log('onShow 未触发，直接启动游戏');
     initGame();
-  });
-} else if (typeof tt !== 'undefined') {
-  // 抖音环境
-  tt.onShow(function() {
-    console.log('抖音小游戏显示，启动游戏');
-    initGame();
-  });
-} else {
-  // 非小游戏环境（测试用）
-  console.log('非小游戏环境，直接启动游戏');
-  setTimeout(initGame, 100);
-}
+  }
+}, 500);
 
 // 导出游戏实例供调试
 if (typeof globalThis !== 'undefined') {
