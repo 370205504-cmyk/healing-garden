@@ -36,6 +36,11 @@ temp/
 *.runtimeconfig.json
 *.user
 
+# Reports & temp
+test-reports/
+memory/
+data/
+
 # Backup files
 *.backup
 *.bak

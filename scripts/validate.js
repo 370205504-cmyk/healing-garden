@@ -382,15 +382,24 @@ function validateCompatibility() {
   if (fs.existsSync(gameJsPath)) {
     const content = fs.readFileSync(gameJsPath, 'utf8');
     
-    const requiredPatterns = [
-      'globalThis.window = globalThis',
-      'errorCatchApi.onError',
-      'require(\'../platform/index.js\')'
+    // 检查兼容代码模式（支持新旧两种写法）
+    const compatibilityChecks = [
+      { pattern: 'globalThis.window = globalThis', name: 'globalThis兜底' },
+      { patterns: ['errorCatchApi.onError', 'Platform.onError'], name: '全局错误捕获' },
+      { pattern: 'require(\'../platform/index.js\')', name: 'Platform加载' }
     ];
     
-    for (const pattern of requiredPatterns) {
-      if (!content.includes(pattern)) {
-        violations.push(`game.js缺少必要兼容代码: "${pattern}"`);
+    for (const check of compatibilityChecks) {
+      if (check.patterns) {
+        // 多模式：任一匹配即可
+        const hasAny = check.patterns.some(p => content.includes(p));
+        if (!hasAny) {
+          violations.push(`game.js缺少必要兼容代码: "${check.name}"（需要${check.patterns.join(' 或 ')}中任一种）`);
+        }
+      } else if (check.pattern) {
+        if (!content.includes(check.pattern)) {
+          violations.push(`game.js缺少必要兼容代码: "${check.pattern}"`);
+        }
       }
     }
   }
