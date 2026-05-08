@@ -5,25 +5,38 @@
 
 > 种一片花园，治愈所有不开心
 
-## 🚀 快速交付指南
+## 仓库结构
 
-### 立即运行（微信小游戏）
-1. 打开微信开发者工具
-2. 导入项目：选择 `D:\AutoHealingGarden\dist\wechat`
-3. 点击编译按钮，立即体验游戏
+```
+healing-garden/
+  game/               # Cocos Creator 3.x 游戏项目（TypeScript）
+  src/                # Canvas2D 原型（双平台适配层 Platform）
+  server/             # Node.js 后端
+  platform/           # 微信/抖音统一平台适配层
+  scripts/            # 构建/部署/测试脚本
+  docs/               # 设计文档、架构文档
+  knowledge-base/     # 合规、设计、技术知识库
+  automation/         # CI/CD 自动化
+  deploy/             # 部署配置与监控
+```
 
-### 核心交付内容
-- ✅ **完整源代码**：`src/game.js` + 双平台适配层
-- ✅ **微信小游戏包**：`dist/wechat/` 目录立即可用
-- ✅ **花卉动画系统**：5阶段生长动画已实现
-- ✅ **7轮全量校验**：100%通过，零错误开发
-- ✅ **完整文档**：交付文档、开发指南、检查清单
+## 快速开始
 
-### 技术特性
-- 一套代码支持微信 + 抖音双平台
-- 遵循微信小游戏零错误总指令
-- 100%花园治愈主题，无偏离内容
-- 竖屏适配，点击区域≥44px，真机友好
+### 运行 Canvas2D 原型
+```
+# 已包含所有代码，在小游戏环境直接运行 src/game.js
+```
+
+### 构建 Cocos Creator 版本
+1. 用 Cocos Creator 3.8.x 打开 `game/` 目录
+2. 选择目标平台（微信/抖音/Web）
+3. 构建并预览
+
+## 技术特性
+- Canvas2D 原型：一套代码支持微信 + 抖音双平台
+- Cocos Creator 版本：TypeScript + 平台适配器模式
+- 7轮全量校验脚本
+- GitHub Actions CI 自动化
 
 ## 项目概述
 
