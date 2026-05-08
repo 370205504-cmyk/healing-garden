@@ -144,15 +144,15 @@ export class GardenSystem extends Component {
             decorations?: any[];
         }>('garden_data');
         if (data) {
-            // 解锁区域
-            data.unlockedAreas?.forEach((areaId: number) => {
-                const area = this.gardenAreas.find(a => a.id === areaId);
-                if (area) area.unlocked = true;
-            });
-            
-            // 加载装饰品
-            this.decorations = data.decorations || [];
-                
+            try {
+                // 解锁区域
+                data.unlockedAreas?.forEach((areaId: number) => {
+                    const area = this.gardenAreas.find(a => a.id === areaId);
+                    if (area) area.unlocked = true;
+                });
+
+                // 加载装饰品
+                this.decorations = data.decorations || [];
             } catch (e) {
                 console.error('加载花园数据失败:', e);
             }

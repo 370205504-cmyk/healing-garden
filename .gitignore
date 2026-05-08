@@ -49,3 +49,7 @@ data/
 game/library/
 game/temp/
 game/local/
+
+# Node
+package-lock.json
+node_modules/
