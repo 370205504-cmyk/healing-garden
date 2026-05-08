@@ -36,6 +36,10 @@ temp/
 *.runtimeconfig.json
 *.user
 
+# Backup files
+*.backup
+*.bak
+
 # Library cache
 game/library/
 game/temp/
