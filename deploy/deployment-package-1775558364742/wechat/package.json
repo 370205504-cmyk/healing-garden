@@ -1,0 +1,15 @@
+{
+  "name": "healing-garden",
+  "version": "1.0.0",
+  "description": "治愈花园 - 沉浸式种植体验游戏",
+  "type": "module",
+  "main": "game.js",
+  "scripts": {
+    "start": "node game.js",
+    "test": "node -e \"const { testRunner, runEntityManagerTests, runEventBusTests, runSecurityTests } = require('./tests/index.js'); runEntityManagerTests(testRunner); runEventBusTests(testRunner); runSecurityTests(testRunner); testRunner.run();\"",
+    "build": "echo 'Build completed'"
+  },
+  "keywords": ["game", "garden", "planting", "wechat"],
+  "author": "Healing Garden Team",
+  "license": "MIT"
+}

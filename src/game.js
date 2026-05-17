@@ -126,9 +126,11 @@ const GameState = {
   flowers: {}, // 存储每个花田的花卉状态
   lastUpdateTime: Date.now(),
   
-  // 安全获取方法
+  // 安全获取方法（修复：0 被 || 吞掉的 bug）
   safeGet(obj, key, defaultValue) {
-    return (obj || {})[key] || defaultValue;
+    if (obj === null || obj === undefined) return defaultValue;
+    const val = obj[key];
+    return val === undefined ? defaultValue : val;
   },
   
   // 更新方法

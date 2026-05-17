@@ -1,4 +1,15 @@
 {
-  "deviceOrientation": "portrait",
-  "showStatusBar": false
+    "deviceOrientation": "portrait",
+    "showStatusBar": false,
+    "appid": "wx2322a80f2186758f",
+    "game": true,
+    "es6": true,
+    "minified": true,
+    "uploadWithSourceMap": true,
+    "setting": {
+        "urlCheck": false,
+        "es6": true,
+        "minified": true
+    },
+    "compileType": "game"
 }

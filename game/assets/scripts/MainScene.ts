@@ -31,14 +31,14 @@ export class MainScene extends Component {
     private uiManager: UIManager = null!;
 
     onLoad() {
-        // 初始化所有系统组件
+        // 获取所有系统组件
         this.gameManager = this.gameManagerNode.getComponent(GameManager)!;
         this.plantingSystem = this.plantingSystemNode.getComponent(PlantingSystem)!;
         this.gardenSystem = this.gardenSystemNode.getComponent(GardenSystem)!;
         this.economySystem = this.economySystemNode.getComponent(EconomySystem)!;
         this.uiManager = this.uiManagerNode.getComponent(UIManager)!;
 
-        // 设置系统间引用
+        // 依赖注入——双向引用
         this.gameManager.setPlantingSystem(this.plantingSystem);
         this.gameManager.setGardenSystem(this.gardenSystem);
         this.gameManager.setEconomySystem(this.economySystem);
@@ -59,27 +59,26 @@ export class MainScene extends Component {
         this.uiManager.setPlantingSystem(this.plantingSystem);
         this.uiManager.setGardenSystem(this.gardenSystem);
         this.uiManager.setEconomySystem(this.economySystem);
-
-        // 启动游戏
-        this.gameManager.initializeGame();
     }
 
     start() {
-        console.log('自动治愈花园 - 主场景启动');
-        console.log('游戏版本: 1.0.0');
-        console.log('系统状态: 所有系统初始化完成');
+        // 检查离线收益
+        const readyCount = this.gardenSystem.calculateOfflineProgress();
+        if (readyCount > 0) {
+            this.uiManager.showMessage(`欢迎回来！${readyCount} 朵花已盛开！`);
+        }
+
+        // 初始化游戏
+        this.gameManager.initializeGame();
+
+        console.log('🌻 自动治愈花园启动');
+        console.log(`  地块: ${this.gardenSystem.getGardenStats().unlocked}/${GardenSystem.TOTAL_PLOTS}`);
+        console.log(`  已种植: ${this.gardenSystem.getGardenStats().planted}`);
     }
 
     update(deltaTime: number) {
-        // 游戏主循环
-        if (this.gameManager) {
-            this.gameManager.update(deltaTime);
-        }
-        if (this.plantingSystem) {
-            this.plantingSystem.update(deltaTime);
-        }
-        if (this.gardenSystem) {
-            this.gardenSystem.update(deltaTime);
-        }
+        if (this.gameManager) this.gameManager.update(deltaTime);
+        if (this.plantingSystem) this.plantingSystem.update(deltaTime);
+        if (this.gardenSystem) this.gardenSystem.update(deltaTime);
     }
 }

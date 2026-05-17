@@ -1,6 +1,6 @@
 {
   "engine": "cocos-creator-3d",
   "engine_version": "3.8.8",
-  "project_type": "3d",
+  "project_type": "2d",
   "start_scene": "db://assets/scenes/MainScene.fire"
 }

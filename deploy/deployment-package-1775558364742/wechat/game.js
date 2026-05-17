@@ -1,19 +1,47 @@
-// 自动治愈花园 - 微信小游戏版
-console.log('微信小游戏版 v1.0.0-production');
+import { HealingGardenGame } from './engine/index.js';
 
-// 微信适配层
-const WechatAdapter = {
-    init() {
-        console.log('初始化微信平台');
-        return { platform: 'wechat', version: '1.0.0-production' };
+let game = null;
+
+async function initGame() {
+    try {
+        const canUseDOM = typeof window !== 'undefined' && 
+                          typeof document !== 'undefined' && 
+                          typeof document.getElementById === 'function';
+        
+        if (canUseDOM) {
+            setTimeout(() => {
+                const loadingOverlay = document.getElementById('loadingOverlay');
+                if (loadingOverlay) {
+                    loadingOverlay.style.display = 'none';
+                }
+            }, 1500);
+        }
+        
+        console.log('🔧 Creating game instance...');
+        game = new HealingGardenGame();
+        
+        if (game && game.stats) {
+            console.log('🌿 Healing Garden Game initialized!');
+        } else if (game) {
+            console.log('🌿 Healing Garden Game initialized!');
+        }
+    } catch (e) {
+        console.error('❌ Game initialization failed:', e.message);
     }
-};
+}
 
-// 游戏逻辑
-window.game = {
-    platform: 'wechat',
-    version: '1.0.0-production',
-    start() { console.log('微信版游戏开始'); }
-};
-
-console.log('✅ 微信小游戏版就绪');
+if (typeof window !== 'undefined' && 
+    typeof document !== 'undefined' && 
+    typeof document.addEventListener === 'function') {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initGame);
+    } else {
+        initGame();
+    }
+} else if (typeof wx !== 'undefined') {
+    const options = wx.getLaunchOptionsSync ? wx.getLaunchOptionsSync() : {};
+    console.log('🌿 Launching in WeChat MiniGame:', options);
+    initGame();
+} else if (typeof module !== 'undefined' && module.exports) {
+    module.exports = { initGame, HealingGardenGame };
+}

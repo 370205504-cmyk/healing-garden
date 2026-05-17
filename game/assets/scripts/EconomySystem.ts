@@ -1,194 +1,148 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, Component } from 'cc';
 import { StorageUtil } from './utils/StorageUtil';
-const { ccclass, property } = _decorator;
+import { FLOWER_TYPES, FlowerType } from './FlowerConfig';
+const { ccclass } = _decorator;
+
+export interface ShopItem {
+    id: string;
+    name: string;
+    price: number;
+    type: 'seed' | 'fertilizer' | 'decoration';
+    unlockLevel: number;
+    description: string;
+}
 
 @ccclass('EconomySystem')
 export class EconomySystem extends Component {
-    
-    // 商店物品
-    private shopItems = [
-        { id: 1, name: '向日葵种子', price: 10, type: 'seed', unlockLevel: 1 },
-        { id: 2, name: '玫瑰种子', price: 20, type: 'seed', unlockLevel: 2 },
-        { id: 3, name: '仙人掌种子', price: 15, type: 'seed', unlockLevel: 3 },
-        { id: 4, name: '幸运草种子', price: 5, type: 'seed', unlockLevel: 1 },
-        { id: 5, name: '普通肥料', price: 30, type: 'fertilizer', unlockLevel: 2 },
-        { id: 6, name: '高级肥料', price: 50, type: 'fertilizer', unlockLevel: 4 },
-        { id: 7, name: '花园长椅', price: 100, type: 'decoration', unlockLevel: 3 },
-        { id: 8, name: '喷泉', price: 200, type: 'decoration', unlockLevel: 5 }
-    ];
-    
-    // 玩家背包
-    private inventory: Map<number, number> = new Map();
-    
-    // 系统引用
+    // 商店物品——种子从FlowerConfig同步
+    private shopItems: ShopItem[] = [];
+
+    // 玩家背包: itemId -> quantity
+    private inventory: Map<string, number> = new Map();
+
     private _gameManager: any = null;
     private _uiManager: any = null;
-    
+
     onLoad() {
+        this.initShop();
         this.loadInventory();
     }
-    
-    // 获取 GameManager（优先使用注入的引用，其次尝试全局单例）
-    private getGameManager(): any {
-        return this._gameManager || (window as any).GameManager?.instance;
+
+    /** 初始化商店物品列表 */
+    private initShop() {
+        this.shopItems = [];
+
+        // 从 FlowerConfig 同步种子
+        for (const flower of FLOWER_TYPES) {
+            this.shopItems.push({
+                id: `seed_${flower.id}`,
+                name: `${flower.name}种子`,
+                price: flower.price,
+                type: 'seed',
+                unlockLevel: flower.unlockLevel,
+                description: `种植后${Math.round(flower.growthTime / 60)}分钟收获`
+            });
+        }
+
+        // 肥料和装饰品
+        this.shopItems.push(
+            { id: 'fertilizer_normal', name: '普通肥料', price: 30, type: 'fertilizer', unlockLevel: 2, description: '加速生长50%' },
+            { id: 'fertilizer_advanced', name: '高级肥料', price: 80, type: 'fertilizer', unlockLevel: 4, description: '加速生长100%' },
+            { id: 'decoration_bench', name: '花园长椅', price: 100, type: 'decoration', unlockLevel: 3, description: '花园装饰' },
+            { id: 'decoration_fountain', name: '喷泉', price: 200, type: 'decoration', unlockLevel: 5, description: '提升花园美观度' }
+        );
     }
 
-    // 购买物品
-    buyItem(itemId: number, quantity: number = 1): boolean {
-        const item = this.shopItems.find(i => i.id === itemId);
-        if (!item) return false;
-        
-        // 检查是否已解锁
-        const gameManager = this.getGameManager();
-        if (gameManager && gameManager.level < item.unlockLevel) {
-            console.log(`需要等级 ${item.unlockLevel} 才能购买 ${item.name}`);
-            return false;
-        }
-        
-        const totalCost = item.price * quantity;
-        
-        // 检查金币是否足够
-        if (gameManager && gameManager.spendCoins(totalCost)) {
-            // 添加到背包
-            const current = this.inventory.get(itemId) || 0;
-            this.inventory.set(itemId, current + quantity);
-            
-            // 保存背包数据
-            this.saveInventory();
-            
-            // 触发购买事件
-            this.node.emit('item-purchased', { item, quantity });
-            
-            console.log(`购买了 ${quantity} 个 ${item.name}，花费 ${totalCost} 金币`);
-            return true;
-        }
-        
-        return false;
-    }
-    
-    // 出售物品（如果有出售功能）
-    sellItem(itemId: number, quantity: number = 1): boolean {
-        const item = this.shopItems.find(i => i.id === itemId);
-        if (!item) return false;
-        
-        const current = this.inventory.get(itemId) || 0;
-        if (current < quantity) return false;
-        
-        const totalValue = Math.floor(item.price * 0.7 * quantity); // 70% 回收价
-        
-        // 更新背包
-        this.inventory.set(itemId, current - quantity);
-        if (this.inventory.get(itemId) === 0) {
-            this.inventory.delete(itemId);
-        }
-        
-        // 保存背包数据
-        this.saveInventory();
-        
-        // 增加金币
-        const gameManager = this.getGameManager();
-        if (gameManager) {
-            gameManager.addCoins(totalValue);
-        }
-        
-        // 触发出售事件
-        this.node.emit('item-sold', { item, quantity, value: totalValue });
-        
-        return true;
-    }
-    
-    // 使用物品
-    useItem(itemId: number, quantity: number = 1): boolean {
-        const current = this.inventory.get(itemId) || 0;
-        if (current < quantity) return false;
-        
-        // 更新背包
-        this.inventory.set(itemId, current - quantity);
-        if (this.inventory.get(itemId) === 0) {
-            this.inventory.delete(itemId);
-        }
-        
-        // 保存背包数据
-        this.saveInventory();
-        
-        // 触发使用事件
-        const item = this.shopItems.find(i => i.id === itemId);
-        if (item) {
-            this.node.emit('item-used', { item, quantity });
-        }
-        
-        return true;
-    }
-    
-    // 获取商店物品
-    getShopItems(): any[] {
-        const gameManager = this.getGameManager();
-        const playerLevel = gameManager?.level || 1;
-        
-        // 只返回已解锁的物品
+    /** 获取可购买的商店物品（根据玩家等级） */
+    getAvailableShopItems(playerLevel: number): ShopItem[] {
         return this.shopItems.filter(item => item.unlockLevel <= playerLevel);
     }
-    
-    // 获取背包物品
-    getInventory(): Map<number, number> {
-        return new Map(this.inventory);
+
+    /** 获取所有商店物品 */
+    getAllShopItems(): ShopItem[] {
+        return [...this.shopItems];
     }
-    
-    // 获取物品数量
-    getItemQuantity(itemId: number): number {
+
+    /** 购买物品 */
+    buyItem(itemId: string, quantity: number = 1): boolean {
+        const item = this.shopItems.find(i => i.id === itemId);
+        if (!item) return false;
+
+        const gm = this._gameManager;
+        if (!gm) return false;
+
+        // 等级检查
+        if (gm.level < item.unlockLevel) {
+            this._uiManager?.showMessage(`需要等级 ${item.unlockLevel}`);
+            return false;
+        }
+
+        const totalCost = item.price * quantity;
+        if (!gm.spendCoins(totalCost)) {
+            this._uiManager?.showMessage('金币不足！');
+            return false;
+        }
+
+        // 入背包
+        const current = this.inventory.get(itemId) || 0;
+        this.inventory.set(itemId, current + quantity);
+        this.saveInventory();
+        this.node.emit('item-purchased', { item, quantity });
+        return true;
+    }
+
+    /** 使用/消耗物品 */
+    useItem(itemId: string, quantity: number = 1): boolean {
+        const current = this.inventory.get(itemId) || 0;
+        if (current < quantity) return false;
+
+        this.inventory.set(itemId, current - quantity);
+        if (this.inventory.get(itemId)! <= 0) {
+            this.inventory.delete(itemId);
+        }
+        this.saveInventory();
+        this.node.emit('item-used', { itemId, quantity });
+        return true;
+    }
+
+    /** 获取背包中某物品数量 */
+    getItemQuantity(itemId: string): number {
         return this.inventory.get(itemId) || 0;
     }
-    
-    // 保存背包数据
-    saveInventory() {
-        const inventoryObj = Object.fromEntries(this.inventory);
-        StorageUtil.set('inventory', inventoryObj);
+
+    /** 获取全部背包 */
+    getInventory(): Map<string, number> {
+        return new Map(this.inventory);
     }
-    
-    // 加载背包数据
+
+    /** 保存背包 */
+    saveInventory() {
+        StorageUtil.set('inventory_v2', Object.fromEntries(this.inventory));
+    }
+
+    /** 加载背包 */
     loadInventory() {
-        const inventoryObj = StorageUtil.get<Record<string, number>>('inventory');
-        if (inventoryObj) {
-            try {
-                this.inventory = new Map(Object.entries(inventoryObj));
-            } catch (e) {
-                console.error('加载背包数据失败:', e);
-            }
+        const data = StorageUtil.get<Record<string, number>>('inventory_v2');
+        if (data) {
+            this.inventory = new Map(Object.entries(data));
         }
     }
-    
-    // 获取玩家资产统计
+
+    /** 获取经济状态摘要 */
     getPlayerAssets(): any {
-        const gameManager = this.getGameManager();
-        
         return {
-            coins: gameManager?.coins || 0,
-            level: gameManager?.level || 1,
+            coins: this._gameManager?.coins || 0,
+            level: this._gameManager?.level || 1,
             inventorySize: this.inventory.size,
-            totalItems: Array.from(this.inventory.values()).reduce((sum, qty) => sum + qty, 0)
+            totalItems: Array.from(this.inventory.values()).reduce((a, b) => a + b, 0)
         };
     }
-    
-    // 系统引用设置
-    setGameManager(gameManager: any) {
-        this._gameManager = gameManager;
-    }
-    
-    setUIManager(uiManager: any) {
-        this._uiManager = uiManager;
-    }
-    
-    // 获取系统引用
-    get gameManager(): any {
-        return this._gameManager;
-    }
-    
-    get uiManager(): any {
-        return this._uiManager;
-    }
-    
-    // 更新循环
-    update(deltaTime: number) {
-        // 经济系统定期更新逻辑
-    }
+
+    setGameManager(gm: any) { this._gameManager = gm; }
+    setUIManager(ui: any) { this._uiManager = ui; }
+
+    get gameManager(): any { return this._gameManager; }
+    get uiManager(): any { return this._uiManager; }
+
+    update(_deltaTime: number) {}
 }

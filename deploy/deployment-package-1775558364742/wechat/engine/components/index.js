@@ -1,0 +1,10 @@
+export { TransformComponent } from './Components.js';
+export { RenderComponent } from './Components.js';
+export { PhysicsComponent } from './Components.js';
+export { ColliderComponent } from './Components.js';
+export { ClickableComponent } from './Components.js';
+export { ParticleComponent } from './Components.js';
+export { PlantComponent } from './Components.js';
+export { UIComponent } from './Components.js';
+export { DataComponent } from './Components.js';
+export { AudioComponent } from './Components.js';

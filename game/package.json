@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "自动治愈花园",
   "main": "main.js",
-  "dependencies": {},
   "devDependencies": {
-    "typescript": "^5.0.0",
     "@types/node": "^20.0.0",
-    "eslint": "^8.0.0"
+    "eslint": "^8.0.0",
+    "typescript": "^5.9.3"
   },
   "scripts": {
     "build:web": "echo '请使用Cocos Creator构建Web平台'",
@@ -16,5 +15,9 @@
     "clean": "rm -rf build/* dist/*",
     "prebuild": "npm run clean",
     "postbuild": "echo '构建完成'"
-  }
+  },
+  "creator": {
+    "version": "3.8.8"
+  },
+  "uuid": "d76b29f9-3bd1-4149-9840-571ef158bcce"
 }
